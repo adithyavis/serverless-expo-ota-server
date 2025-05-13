@@ -8,11 +8,11 @@ A custom serverless implementation of Expo Over-The-Air (OTA) updates server. Bu
 
 ## Why serverless?
 
-1. An OTA server is a low-traffic server that only needs to serve a few requests per day. A serverless implementation is a cost effective way to manage your app's OTA update distribution, while also handling traffic spikes efficiently.
+1. Compared to an application server, an OTA server is typically low-traffic server and serves fewer requests per day. A serverless implementation is a cost effective way to manage your app's OTA update distribution, while also handling traffic spikes efficiently.
 
 2. An example of an OTA server implementation (https://github.com/expo/custom-expo-updates-server) stores bundle and asset files on the server disk and read from it every time a GET /api/manifest request or a GET /api/assets request is made. This makes the solution not suitable for horizontally scalable deployments.
 
-3. https://github.com/xavia-io/xavia-ota provides a workaround by persisting files on a blob storage service. But still, with every GET /api/manifest request made to the server from the client, the server downloads these files from the blob storage service to the disk, reads them and generates the manifest JSON on runtime. This increases the latency of the GET /api/manifest request. Asset caching benefits from cloudfront CDN are also not available.
+3. https://github.com/xavia-io/xavia-ota provides a workaround by persisting files on a blob storage service. But still, with every GET /api/manifest request made to the server from the client, the server downloads these files from the blob storage service to the disk, reads them and generates the manifest JSON on runtime. This increases the API latency of the GET /api/manifest API request. Asset caching benefits from cloudfront CDN are also not available.
 
 4. So, to summarize, the serverless implementation
 
